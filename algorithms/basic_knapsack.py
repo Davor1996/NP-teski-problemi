@@ -10,11 +10,11 @@ def solve_knapsack(items, capacity):
     
     dp = [[0 for x in range(capacity+1)] for y in range(n)]
     
-    # populate the capacity = 0 columns, with '0' capacity we have '0' profit
+    # Populate the capacity = 0 columns, with '0' capacity we have '0' profit
     for i in range(0, n):
         dp[i][0] = 0
     
-    # if we have only one weight, we will take it if it is not more than the capacity
+    # If we have only one weight, we will take it if it is not more than the capacity
     for c in range(0, capacity+1):
         if items[0][1] <= c:
             dp[0][c] = items[0][0]
@@ -27,5 +27,5 @@ def solve_knapsack(items, capacity):
             profit2 = dp[i-1][c]
             dp[i][c] = max(profit1, profit2)
     
-    # maximum profit will be at the bottom-right corner.
+    # Maximum profit will be at the bottom-right corner.
     return dp[n-1][capacity]

@@ -24,6 +24,7 @@ def solve_knapsack(items, capacity):
             profit1, profit2 = 0, 0
             if items[i][1] <= c:
                 profit1 = items[i][0] + dp[i - 1][c - items[i][1]]
+
             profit2 = dp[i-1][c]
             dp[i][c] = max(profit1, profit2)
     

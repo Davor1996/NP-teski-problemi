@@ -15,4 +15,4 @@ def solve_knapsack(items, capacity):
             total_value += item[0]
             total_weight += item[1]
 
-    return knapsack, total_value
+    return knapsack, total_value, total_weight

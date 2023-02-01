@@ -38,4 +38,9 @@ def solve_knapsack(items, capacity):
     if len(knapsack) == 0:
         return [], 0, 0
 
-    return solve_without_weightiest(items, capacity, knapsack, total_value, total_weight)
+    optimized_knapsack, optimized_total_value, optimized_total_weight = solve_without_weightiest(items, capacity, knapsack, total_value, total_weight)
+    
+    if optimized_total_value > total_value:
+        return optimized_knapsack, optimized_total_value, optimized_total_weight
+    else:
+        return knapsack, total_value, total_weight

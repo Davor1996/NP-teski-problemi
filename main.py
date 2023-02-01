@@ -23,7 +23,7 @@ def generate_random_items(rand_values, rand_weights, len=10):
 def solve_given_knapsack(items, capacity, verbose=False):
     total_value = algorithms.optimal_knapsack.solve_knapsack(items, capacity)
     greedy_knapsack, greedy_value, greedy_weight = algorithms.greedy_knapsack.solve_knapsack(items, capacity)
-    optimal_knapsack, optimal_value, optimal_weight = algorithms.optimized_dantzing.solve_knapsack(items, capacity)
+    optimized_knapsack, optimized_value, optimized_weight = algorithms.optimized_dantzing.solve_knapsack(items, capacity)
 
     # Verbose Results
     if verbose:
@@ -40,9 +40,11 @@ def solve_given_knapsack(items, capacity, verbose=False):
         print(f'Total weight: {greedy_weight}')
 
         print('\n-----------------[OPTIMIZED DANTZING]-----------------')
-        print(f'Knapsack contents: {optimal_knapsack}')
-        print(f'Total value: {optimal_value}')
-        print(f'Total weight: {optimal_weight}')
+        print(f'Knapsack contents: {optimized_knapsack}')
+        print(f'Total value: {optimized_value}')
+        print(f'Total weight: {optimized_weight}')
+
+    return greedy_value < optimized_value
 
 
 # Setup

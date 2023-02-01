@@ -1,34 +1,41 @@
 """
-    Solution to the 0/1 Knapsack problem using Dantzing's greedy algorithm.
+    Solution to the 0/1 Knapsack problem using optimized Dantzing's greedy algorithm.
 """
 
-def solve_knapsack(items, capacity):
-    items = sorted(items, key=lambda x: x[0]/x[1], reverse=True)
-    heaviest_item = max(items, key=lambda x: x[1])
-    items.remove(heaviest_item)
-    
+def solve_greedy_knapsack(items, capacity):
+    items = sorted(items, key=lambda x: x[0] / x[1], reverse=True)
+
     knapsack = []
     total_value = 0
     total_weight = 0
-    
+
     for item in items:
         if total_weight + item[1] <= capacity:
             knapsack.append(item)
             total_value += item[0]
             total_weight += item[1]
 
-    avg_ratio = sum(i[0]/i[1] for i in knapsack) / len(knapsack)
-    print(avg_ratio)
+    return knapsack, total_value, total_weight
 
-    knapsack2 = []
-    knapsack2.append(heaviest_item)
-    total_value = heaviest_item[0]
-    total_weight = heaviest_item[1]
+def solve_without_weightiest(items, capacity, knapsack, total_value, total_weight):
+    knapsack = sorted(knapsack, key=lambda x: x[1], reverse=True)
+    unique_items = list(set(items) - set(knapsack))
+    heaviest_item = knapsack.pop(0)
 
-    for item in knapsack:
+    total_value -= heaviest_item[0]
+    total_weight -= heaviest_item[1]
+
+    for item in unique_items:
         if total_weight + item[1] <= capacity:
-            knapsack2.append(item)
+            knapsack.append(item)
             total_value += item[0]
             total_weight += item[1]
 
-    return knapsack2, total_value, total_weight, heaviest_item
+    return knapsack, total_value, total_weight
+
+def solve_knapsack(items, capacity):
+    knapsack, total_value, total_weight = solve_greedy_knapsack(items, capacity)
+    if len(knapsack) == 0:
+        return [], 0, 0
+
+    return solve_without_weightiest(items, capacity, knapsack, total_value, total_weight)

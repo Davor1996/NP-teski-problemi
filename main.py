@@ -56,7 +56,7 @@ for i in range(run_iterations):
     items, capacity = generate_random_items(random_values, random_weights, 10)
     was_optimal_better = solve_given_knapsack(items, capacity)
 
-    if was_optimal_better == 2:
+    if was_optimal_better:
         optimal_better_cnt += 1
 
 print('-----------------[RUN STATS]-----------------')

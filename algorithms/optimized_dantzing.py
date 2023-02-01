@@ -17,13 +17,13 @@ def solve_greedy_knapsack(items, capacity):
 
     return knapsack, total_value, total_weight
 
-def solve_without_weightiest(items, capacity, knapsack, total_value, total_weight):
-    knapsack = sorted(knapsack, key=lambda x: x[1], reverse=True)
+def solve_without_last(items, capacity, knapsack, total_value, total_weight):
+    #knapsack = sorted(knapsack, key=lambda x: x[1], reverse=True)
     unique_items = list(set(items) - set(knapsack))
-    heaviest_item = knapsack.pop(0)
+    last_item = knapsack.pop(0)
 
-    total_value -= heaviest_item[0]
-    total_weight -= heaviest_item[1]
+    total_value -= last_item[0]
+    total_weight -= last_item[1]
 
     for item in unique_items:
         if total_weight + item[1] <= capacity:
@@ -38,7 +38,7 @@ def solve_knapsack(items, capacity):
     if len(knapsack) == 0:
         return [], 0, 0
 
-    optimized_knapsack, optimized_total_value, optimized_total_weight = solve_without_weightiest(items, capacity, knapsack, total_value, total_weight)
+    optimized_knapsack, optimized_total_value, optimized_total_weight = solve_without_last(items, capacity, knapsack, total_value, total_weight)
     
     if optimized_total_value > total_value:
         return optimized_knapsack, optimized_total_value, optimized_total_weight

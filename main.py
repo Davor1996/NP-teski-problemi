@@ -1,9 +1,9 @@
 import random
 import time
 
-import algorithms.basic_knapsack
+import algorithms.optimal_knapsack
 import algorithms.greedy_knapsack
-import algorithms.my_optimal_knapsack
+import algorithms.optimized_dantzing
 
 # Variables
 random_values = [1, 100]
@@ -21,9 +21,9 @@ def generate_random_items(rand_values, rand_weights, len=10):
     return items, capacity
 
 def solve_given_knapsack(items, capacity, verbose=False):
-    total_value = algorithms.basic_knapsack.solve_knapsack(items, capacity)
+    total_value = algorithms.optimal_knapsack.solve_knapsack(items, capacity)
     greedy_knapsack, greedy_value, greedy_weight = algorithms.greedy_knapsack.solve_knapsack(items, capacity)
-    optimal_knapsack, optimal_value, optimal_weight = algorithms.my_optimal_knapsack.solve_knapsack(items, capacity)
+    optimal_knapsack, optimal_value, optimal_weight = algorithms.optimized_dantzing.solve_knapsack(items, capacity)
 
     # Verbose Results
     if verbose:
@@ -31,15 +31,15 @@ def solve_given_knapsack(items, capacity, verbose=False):
         print(f'Items: {items}')
         print(f'Knapsack capacity: {capacity}')
 
-        print('\n-----------------[BASIC]-----------------')
+        print('\n-----------------[OPTIMAL]-----------------')
         print(f'Total value: {total_value}')
 
-        print('\n-----------------[GREEDY]-----------------')
+        print('\n-----------------[DANTZING]-----------------')
         print(f'Knapsack contents: {greedy_knapsack}')
         print(f'Total value: {greedy_value}')
         print(f'Total weight: {greedy_weight}')
 
-        print('\n-----------------[MY OPTIMAL]-----------------')
+        print('\n-----------------[OPTIMIZED DANTZING]-----------------')
         print(f'Knapsack contents: {optimal_knapsack}')
         print(f'Total value: {optimal_value}')
         print(f'Total weight: {optimal_weight}')
